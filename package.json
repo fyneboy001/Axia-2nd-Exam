@@ -1,0 +1,23 @@
+{
+  "name": "axia_2nd-exam",
+  "version": "0.0.1",
+  "description": "Axia 2nd Exam",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon index.js"
+  },
+  "keywords": [
+    "get",
+    "put",
+    "delete",
+    "update"
+  ],
+  "author": "FINEBOY, Rosemary Yole",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.21.2",
+    "mongoose": "^8.9.5",
+    "nodemon": "^3.1.9"
+  }
+}
