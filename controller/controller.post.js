@@ -9,9 +9,9 @@ const createPost = async (req, res) => {
   try {
     const newPost = new postModel(body);
     await newPost.save();
-    res.json("post created successfully");
+    res.status(200).json("post created successfully");
   } catch (error) {
-    res.send("something went wrong");
+    res.status(500).send("something went wrong");
   }
 };
 
@@ -23,7 +23,7 @@ const getSinglePost = async (req, res) => {
     const onePost = await postModel.findById(id);
     return res.json(onePost);
   } catch (error) {
-    res.send("something went wrong");
+    res.status(500).send("something went wrong");
   }
 };
 
@@ -43,13 +43,13 @@ const deletePost = async (req, res) => {
     }
     //check if the creatorid in the post matches the creator id passed from the body
     if (post.creatorId.toString() !== creatorId) {
-      return res.send("this post does not belong to you");
+      return res.status(403).send("this post does not belong to you");
     }
 
     await postModel.findByIdAndDelete(id);
-    res.send("Post deleted successfully");
+    res.status(200).send("Post deleted successfully");
   } catch (error) {
-    res.send("something went wrong");
+    res.status(500).send("something went wrong");
   }
 };
 
@@ -59,7 +59,7 @@ const getAllPost = async (req, res) => {
     const allPost = await postModel.find();
     return res.json(allPost);
   } catch (error) {
-    res.send("something went wrong");
+    res.statu(500).send("something went wrong");
   }
 };
 

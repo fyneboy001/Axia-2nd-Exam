@@ -15,16 +15,16 @@ const createUser = async (req, res) => {
   //validating if the email sent from the frontend already exist
   const checkUserEmail = await userModel.findOne({ email: others.email });
   if (checkUserEmail) {
-    return res.json("User already exist");
+    return res.status(409).json("User already exist");
   }
 
   //using try save the user information and catch error by sending a message back if something goes wrong
   try {
     const newUser = new userModel({ password: hashPassword, ...others });
     await newUser.save();
-    return res.json("User account created successfully");
+    return res.status(200).json("User account created successfully");
   } catch (error) {
-    return res.json("Unable to create account");
+    return res.status(400).json("Unable to create account");
   }
 };
 
@@ -34,9 +34,9 @@ const deleteUser = async (req, res) => {
 
   try {
     const user = await userModel.findByIdAndDelete(id);
-    res.send("User Account Deleted Successfully");
+    res.status(200).send("User Account Deleted Successfully");
   } catch (error) {
-    res.send("something went wrong");
+    res.status(500).send("something went wrong");
   }
 };
 
