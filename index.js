@@ -21,6 +21,6 @@ mongoose
 app.use(postRoute);
 
 //
-app.listen(5000, () => {
+app.listen(4000, () => {
   console.log("app is running");
 });

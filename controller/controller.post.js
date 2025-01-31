@@ -15,6 +15,18 @@ const createPost = async (req, res) => {
   }
 };
 
+//create a function that get one post from your database
+const getSinglePost = async (req, res) => {
+  const { id } = req.params;
+  try {
+    //const onePost = await postModel.findById(req.params.id);
+    const onePost = await postModel.findById(id);
+    return res.json(onePost);
+  } catch (error) {
+    res.send("something went wrong");
+  }
+};
+
 //Creating a function for a user to delete a post. only the creator is allowed to delete a post
 const deletePost = async (req, res) => {
   const { creatorId } = req.body;
@@ -41,5 +53,15 @@ const deletePost = async (req, res) => {
   }
 };
 
+//Get all the post the users created
+const getAllPost = async (req, res) => {
+  try {
+    const allPost = await postModel.find();
+    return res.json(allPost);
+  } catch (error) {
+    res.send("something went wrong");
+  }
+};
+
 //export your functions and import them in your route
-module.exports = { createPost, deletePost };
+module.exports = { createPost, getSinglePost, deletePost, getAllPost };

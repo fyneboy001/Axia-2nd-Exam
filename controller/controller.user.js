@@ -28,22 +28,10 @@ const createUser = async (req, res) => {
   }
 };
 
-//Generate a function that get all post created by users
-const getAllPost = async (req, res) => {
-  try {
-    const allPost = await postModel.find();
-    return res.json(allPost);
-  } catch (error) {
-    res.send("something went wrong");
-  }
-};
-
-//Generate a function to delete a User
+//delete user function
 const deleteUser = async (req, res) => {
-  //request for the user id
   const { id } = req.body;
 
-  //using try and catch delete the user or send a message back
   try {
     const user = await userModel.findByIdAndDelete(id);
     res.send("User Account Deleted Successfully");
@@ -52,16 +40,15 @@ const deleteUser = async (req, res) => {
   }
 };
 
-const getOnePost = async (req, res) => {
+//Getting a single user
+const getSingleUser = async (req, res) => {
   const { id } = req.params;
   try {
-    //const onePost = await postModel.findById(req.params.id);
-    const onePost = await postModel.findById(id);
-    return res.json(onePost);
+    const oneUser = await userModel.findById(id);
+    return res.json(oneUser);
   } catch (error) {
-    res.send("something went wrong");
+    res.status(500).send("something went wrong");
   }
 };
-
 //Export your function inside an object which will be imported in the route
-module.exports = { createUser, getAllPost, getOnePost, deleteUser };
+module.exports = { createUser, deleteUser, getSingleUser };

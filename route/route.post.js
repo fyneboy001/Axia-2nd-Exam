@@ -4,15 +4,16 @@ const route = express.Router();
 //importing my functions from my controller
 const {
   createPost,
-  getAllPost,
+  getSinglePost,
   deletePost,
-  getOnePost,
+  getAllPost,
 } = require("../controller/controller.post");
 
-//creating my route for my functions
+//Performing your CRUD operator
 route.post("/post", createPost);
 route.delete("/post/:id", deletePost);
-rout.get("/post", getAllPost);
-rout.get("/post", getOnePost);
+route.get("/post/:id", getSinglePost);
+route.get("/post", getAllPost);
 
+//exporting your route
 module.exports = route;
